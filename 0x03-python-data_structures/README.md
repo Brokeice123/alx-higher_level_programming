@@ -17,4 +17,4 @@
 - [Python Lists](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)
 - [Python Tuples](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)
 - [Python Sequences](https://docs.python.org/3/tutorial/datastructures.html#sequences)
-- [ChatGPT Research] (https://chat.openai.com/share/4751e2dd-0593-4c5f-a4c7-c7fb64cd6ea8)
+- [ChatGPT Research](https://chat.openai.com/share/4751e2dd-0593-4c5f-a4c7-c7fb64cd6ea8)
