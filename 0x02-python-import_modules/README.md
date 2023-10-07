@@ -1,4 +1,4 @@
-## **0x02. Python - import & modules**
+# **0x02. Python - import & modules**
 ---
 # *Learning Objective*
 - How to import functions from another file
