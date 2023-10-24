@@ -67,8 +67,8 @@ class Square:
 
     def __str__(self):
         """Return the print() and str() representation of the Square."""
-        if self.__size == 0:
-            return ("")
+        if self.__size != 0:
+            [print("") for i in range(0, self.__position[1])]
         else:
             [print("") for i in range(0, self.__position[1])]
             for i in range(0, self.__size):
