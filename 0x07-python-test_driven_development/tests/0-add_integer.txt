@@ -1,0 +1,66 @@
+The ``0-add_integer`` module
+======================
+
+Using ``add_integer``
+-------------------
+
+Importing the function from the module:
+	>>> add_integer = __import__("0-add_integer").add_integer
+
+Checking normal addition:
+	>>> add_integer(1, 2)
+	3
+
+Checking addition with negative and positive numbers:
+	>>> add_integer(-1, 2)
+	1
+
+Checking addition with negative and negative numbers:
+	>>> add_integer(-1, -2)
+	-3
+
+Checking additon with multiple values:
+	>>> [add_integer(i, i*2) for i in range(10)]
+	[0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
+
+Checking addition with floats:
+	>>> add_integer(1.1, 2.2)
+	3
+
+Checking addition with int and float:
+	>>> add_integer(1, 2.2)
+	3
+
+Checking addition with float and int:
+	>>> add_integer(5.1, 2)
+	7
+
+Checking addition with number and non-number:
+	>>> add_integer(1, "2")
+	Traceback (most recent call last):
+	...
+	TypeError: b must be an integer
+
+Checking addition with non-number and number:
+	>>> add_integer("1", 2)
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer
+
+Checking addition with non-number and non-number:
+	>>> add_integer("1", "2")
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer
+
+Checking addition with boolean and number:
+	>>> add_integer(True, 2)
+	Traceback (most recent call last):
+	...
+	TypeError: a must be an integer
+
+Checking addition with number and boolean:
+	>>> add_integer(1, True)
+	Traceback (most recent call last):
+	...
+	TypeError: b must be an integer
