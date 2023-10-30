@@ -1,0 +1,50 @@
+Doctest for 5-text_indentation.py
+===========================
+Importing the function from the module:
+	>>> text_indentation = __import__("5-text_indentation").text_indentation
+
+Checking for module docstring:
+	>>> k = __import__("5-text_indentation").__doc__
+	>>> len(k) > 1
+	True
+
+Checking for function docstring:
+	>>> k = __import__("5-text_indentation").text_indentation.__doc__
+	>>> len(k) > 1
+	True
+
+Checking with no arguments:
+	>>> text_indentation()
+	Traceback (most recent call last):
+	...
+	TypeError: text_indentation() missing 1 required positional argument: 'text'
+
+Checking with non-string argument:
+	>>> text_indentation(1)
+	Traceback (most recent call last):
+	...
+	TypeError: text must be a string
+
+Checking with empty string argument:
+	>>> text_indentation('')
+	<BLANKLINE>
+
+Checking with only spaces argument:
+	>>> text_indentation('    ')
+	<BLANKLINE>
+
+Checking with many args:
+	>>> text_indentation('hello', 'world', '!')
+	Traceback (most recent call last):
+	...
+	TypeError: text_indentation() takes 1 positional argument but 3 were given
+
+Checking with float argument:
+	>>> text_indentation(1.5)
+	Traceback (most recent call last):
+	...
+	TypeError: text must be a string
+
+Checking with normal string argument:
+	>>> text_indentation('hello')
+	hello
