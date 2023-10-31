@@ -1,0 +1,78 @@
+Doctest for 100-matrix_mul.py
+===========================
+Importing the function from the module:
+	>>> matrix_mul = __import__("100-matrix_mul").matrix_mul
+
+Checking for module docstring:
+	>>> k = __import__("100-matrix_mul").__doc__
+	>>> len(k) > 1
+	True
+
+Checking for function docstring:
+	>>> k = __import__("100-matrix_mul").matrix_mul.__doc__
+	>>> len(k) > 1
+	True
+
+Checking normal multiplication:
+	>>> matrix_mul([[1, 2], [4, 5]], [[1, 2], [4, 5]])
+	[[9, 12], [24, 33]]
+
+Checking m_a not list error:
+	>>> matrix_mul(1, [[1, 2], [4, 5]])
+	Traceback (most recent call last):
+	...
+	TypeError: m_a must be a list
+
+Checking m_b not list error:
+	>>> matrix_mul([[1, 2], [4, 5]], 1)
+	Traceback (most recent call last):
+	...
+	TypeError: m_b must be a list
+
+Checking m_a list of lists error:
+	>>> matrix_mul([1, 2], [[1, 2], [4, 5]])
+	Traceback (most recent call last):
+	...
+	TypeError: m_a must be a list of lists
+
+Checking m_b list of lists error:
+	>>> matrix_mul([[1, 2], [4, 5]], [1, 2])
+	Traceback (most recent call last):
+	...
+	TypeError: m_b must be a list of lists
+
+Checking m_a empty list error:
+	>>> matrix_mul([], [[1, 2], [4, 5]])
+	Traceback (most recent call last):
+	...
+	ValueError: m_a can't be empty
+
+Checking m_b empty list error:
+	>>> matrix_mul([[1, 2], [4, 5]], [])
+	Traceback (most recent call last):
+	...
+	ValueError: m_b can't be empty
+
+Checking m_a int and float error:
+	>>> matrix_mul([[1, 2], ["Hello", 5]], [[1, 2], [3, 4]])
+	Traceback (most recent call last):
+	...
+	TypeError: m_a should contain only integers or floats
+
+Checking m_b int and float error:
+	>>> matrix_mul([[1, 2], [3, 4]], [[1, 2], ["Hello", 4]])
+	Traceback (most recent call last):
+	...
+	TypeError: m_b should contain only integers or floats
+
+Checking m_a row size error:
+	>>> matrix_mul([[1, 2], [3]], [[1, 2], [3, 4]])
+	Traceback (most recent call last):
+	...
+	TypeError: each row of m_a must be of the same size
+
+Checking m_b row size error:
+	>>> matrix_mul([[1, 2], [3, 4]], [[1, 2], [3]])
+	Traceback (most recent call last):
+	...
+	TypeError: each row of m_b must be of the same size
