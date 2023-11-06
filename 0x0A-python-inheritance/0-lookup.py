@@ -5,7 +5,5 @@ Contains a function that prints a list of available attributes and methods of an
 
 
 def lookup(obj):
-    """
-    Prints a list of available attributes and methods of an object
-    """
+    """Prints a list of available attributes and methods of an object"""
     return dir(obj)
