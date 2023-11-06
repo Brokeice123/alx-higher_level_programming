@@ -1,0 +1,65 @@
+Doctest for 7-base_geometry module
+===============================
+Importing the function from the module:
+	>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+Checking for module docstring:
+	>>> k = __import__('7-base_geometry').__doc__
+	>>> len(k) > 1
+	True
+
+Checking for class docstring:
+	>>> k = __import__("7-base_geometry").BaseGeometry.__doc__
+	>>> len(k) > 1
+	True
+
+Checking for method docstring:
+	 >>> l = __import__("7-base_geometry").BaseGeometry.area.__doc__
+	 >>> len(l) > 1
+	 True
+
+Checking area failure:
+	 >>> l = BaseGeometry()
+	 >>> l.area()
+	 Traceback (most recent call last):
+	 ...
+	 Exception: area() is not implemented
+
+Checking interger_validator:
+	 >>> l = BaseGeometry()
+	 >>> l.integer_validator('x', 1)
+
+Checking integer_vaidator with 0:
+	 >>> l = BaseGeometry()
+	 >>> l.integer_validator('x', 0)
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: x must be greater than 0
+
+Checking integer_validator failure:
+	 >>> l = BaseGeometry()
+	 >>> l.integer_validator('x', -1)
+	 Traceback (most recent call last):
+	 ...
+	 ValueError: x must be greater than 0
+
+Checking no arguments in integer_validator:
+	 >>> l = BaseGeometry()
+	 >>> l.integer_validator()
+	 Traceback (most recent call last):
+	 ...
+	 TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+Checking 1 argument in integer_validator:
+	 >>> l = BaseGeometry()
+	 >>> l.integer_validator('x')
+	 Traceback (most recent call last):
+	 ...
+	 TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+Checking too many arguments:
+	 >>> l = BaseGeometry()
+	 >>> l.integer_validator('x', 1, 2)
+	 Traceback (most recent call last):
+	 ...
+	 TypeError: integer_validator() takes 3 positional arguments but 4 were given
