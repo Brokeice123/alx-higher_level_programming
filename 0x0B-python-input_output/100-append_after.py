@@ -6,8 +6,14 @@ append_after function
 
 def append_after(filename="", search_string="", new_string=""):
     """appends a string at the end of a text file"""
-    with open(filename, mode="r+", encoding="utf-8") as f:
-        content = f.read()
-        content = content.replace(search_string, new_string)
-        f.seek(0)
-        f.write(content)
+    with open(filename, 'r', encoding='utf-8') as f:
+        line_list = []
+        while True:
+            line = f.readline()
+            if line == "":
+                break
+            line_list.append(line)
+            if search_string in line:
+                line_list.append(new_string)
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.writelines(line_list)
