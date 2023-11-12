@@ -6,6 +6,7 @@ Unittest classes:
     TestRectangle_height
     TestRectangle_x
     TestRectangle_y
+    TestRectangle_area
 """
 import unittest
 from models.rectangle import Rectangle
@@ -266,6 +267,28 @@ class TestRectangle_y(unittest.TestCase):
     def test_negative_y(self):
         with self.assertRaises(ValueError, msg="y must be >= 0"):
             Rectangle(1, 2, 3, -1)
+
+
+class TestRectangle_area(unittest.TestCase):
+    """Unittests for testing area attribute of Rectangle class"""
+
+    def test_area_singledigit(self):
+        r = Rectangle(1, 2, 3, 4, 5)
+        self.assertEqual(r.area(), 2)
+
+    def test_area_doubledigit(self):
+        r = Rectangle(10, 20, 3, 4, 5)
+        self.assertEqual(r.area(), 200)
+
+    def test_area_multidigit(self):
+        r = Rectangle(1000, 20, 3, 4, 5)
+        self.assertEqual(r.area(), 20000)
+
+    def test_area_changed_values(self):
+        r = Rectangle(10, 20, 30, 40, 50)
+        r.width = 1
+        r.height = 2
+        self.assertEqual(r.area(), 2)
 
 
 if __name__ == "__main__":
