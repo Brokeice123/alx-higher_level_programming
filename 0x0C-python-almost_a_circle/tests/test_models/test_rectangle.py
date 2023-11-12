@@ -8,6 +8,8 @@ Unittest classes:
     TestRectangle_y
     TestRectangle_area
     TestRectangle_stdout
+    TestRectangle_update_args
+    TestRectangle_update_kwargs
 """
 import unittest
 import io
@@ -342,6 +344,115 @@ class TestRectangle_stdout(unittest.TestCase):
         catch = TestRectangle_stdout.capture_stdout(r, "display")
         display = "\n\n   ##\n   ##\n   ##\n   ##\n"
         self.assertEqual(display, catch.getvalue())
+
+
+class TestRectangle_update_args(unittest.TestCase):
+    """Unittests for testing update args of Rectangle class"""
+
+    def test_update_args_zero(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update()
+        self.assertEqual("[Rectangle] (10) 10/10 - 10/10", str(r))
+
+    def test_update_args_one(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(1)
+        self.assertEqual("[Rectangle] (1) 10/10 - 10/10", str(r))
+
+    def test_update_args_two(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(1, 2)
+        self.assertEqual("[Rectangle] (1) 10/10 - 2/10", str(r))
+
+    def test_update_args_three(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(1, 2, 3)
+        self.assertEqual("[Rectangle] (1) 10/10 - 2/3", str(r))
+
+    def test_update_args_four(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(1, 2, 3, 4)
+        self.assertEqual("[Rectangle] (1) 4/10 - 2/3", str(r))
+
+    def test_update_args_five(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(1, 2, 3, 4, 5)
+        self.assertEqual("[Rectangle] (1) 4/5 - 2/3", str(r))
+
+    def test_update_args_None_id(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(None)
+        correct = "[Rectangle] ({}) 10/10 - 10/10".format(r.id)
+        self.assertEqual(correct, str(r))
+
+    def test_update_args_invalid_width_type(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="width must be an integer"):
+            r.update(1, "2")
+
+    def test_update_args_invalid_height_type(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="height must be an integer"):
+            r.update(1, 2, "3")
+
+    def test_update_args_invalid_x_type(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="x must be an integer"):
+            r.update(1, 2, 3, "4")
+
+    def test_update_args_invalid_y_type(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="y must be an integer"):
+            r.update(1, 2, 3, 4, "5")
+
+
+class TestRectangle_update_kwargs(unittest.TestCase):
+    """Unittests for testing update kwargs of Rectangle class"""
+
+    def test_update_kwargs_one(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(id=1)
+        self.assertEqual("[Rectangle] (1) 10/10 - 10/10", str(r))
+
+    def test_update_kwargs_two(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(id=1, width=2)
+        self.assertEqual("[Rectangle] (1) 10/10 - 2/10", str(r))
+
+    def test_update_kwargs_three(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(id=1, width=2, height=3)
+        self.assertEqual("[Rectangle] (1) 10/10 - 2/3", str(r))
+
+    def test_update_kwargs_four(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(id=1, width=2, height=3, x=4)
+        self.assertEqual("[Rectangle] (1) 4/10 - 2/3", str(r))
+
+    def test_update_kwargs_five(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        r.update(id=1, width=2, height=3, x=4, y=5)
+        self.assertEqual("[Rectangle] (1) 4/5 - 2/3", str(r))
+
+    def test_update_kwargs_invalid_width_type(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="width must be an integer"):
+            r.update(id=1, width="2")
+
+    def test_update_kwargs_invalid_height_type(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="height must be an integer"):
+            r.update(id=1, height="2")
+
+    def test_update_kwargs_invalid_x_type(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="x must be an integer"):
+            r.update(id=1, x="2")
+
+    def test_update_kwargs_invalid_y_type(self):
+        r = Rectangle(10, 10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="y must be an integer"):
+            r.update(id=1, y="2")
 
 if __name__ == "__main__":
     unittest.main()
