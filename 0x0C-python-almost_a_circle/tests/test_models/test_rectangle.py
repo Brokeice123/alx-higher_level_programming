@@ -7,8 +7,11 @@ Unittest classes:
     TestRectangle_x
     TestRectangle_y
     TestRectangle_area
+    TestRectangle_stdout
 """
 import unittest
+import io
+import sys
 from models.rectangle import Rectangle
 from models.base import Base
 
@@ -290,6 +293,55 @@ class TestRectangle_area(unittest.TestCase):
         r.height = 2
         self.assertEqual(r.area(), 2)
 
+
+class TestRectangle_stdout(unittest.TestCase):
+    """Unittests for testing __str__  and display methods of Rectangle class"""
+
+    @staticmethod
+    def capture_stdout(rect, method):
+        """Captures the output of a method and returns it as a string"""
+        capture = io.StringIO()
+        sys.stdout = capture
+        if method == "print":
+            print(rect)
+        else:
+            rect.display()
+        sys.stdout = sys.__stdout__
+        return capture
+
+    # Test __str__
+    def test_rectangle_str(self):
+        r = Rectangle(10, 2, 3, 4, 5)
+        self.assertEqual("[Rectangle] (5) 3/4 - 10/2", str(r))
+
+    def test_str_changed_values(self):
+        r = Rectangle(10, 20, 30, 40, 50)
+        r.width = 1
+        r.height = 2
+        self.assertEqual("[Rectangle] (50) 30/40 - 1/2", str(r))
+
+    # Test display
+    def test_display_width_height(self):
+        r = Rectangle(2, 3, 0, 0, 0)
+        catch = TestRectangle_stdout.capture_stdout(r, "display")
+        self.assertEqual("##\n##\n##\n", catch.getvalue())
+
+    def test_display_width_height_x(self):
+        r = Rectangle(3, 2, 1, 0, 1)
+        catch = TestRectangle_stdout.capture_stdout(r, "display")
+        self.assertEqual(" ###\n ###\n", catch.getvalue())
+
+    def test_display_width_height_y(self):
+        r = Rectangle(4, 5, 0, 1, 0)
+        catch = TestRectangle_stdout.capture_stdout(r, "display")
+        display = "\n####\n####\n####\n####\n####\n"
+        self.assertEqual(display, catch.getvalue())
+
+    def test_display_width_height_x_y(self):
+        r = Rectangle(2, 4, 3, 2, 0)
+        catch = TestRectangle_stdout.capture_stdout(r, "display")
+        display = "\n\n   ##\n   ##\n   ##\n   ##\n"
+        self.assertEqual(display, catch.getvalue())
 
 if __name__ == "__main__":
     unittest.main()
