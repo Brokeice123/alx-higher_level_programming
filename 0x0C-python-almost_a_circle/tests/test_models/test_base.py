@@ -58,3 +58,7 @@ class TestBase_instantiation(unittest.TestCase):
     def test_dict_id(self):
         b1 = Base({"key": "value"})
         self.assertEqual(b1.id, {"key": "value"})
+
+
+if __name__ == "__main__":
+    unittest.main()
