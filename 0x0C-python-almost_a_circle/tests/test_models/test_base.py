@@ -3,6 +3,7 @@
 Unittest classes:
     TestBase_instantiation
     TestBase_to_json_string
+    TestBase_save_to_file
 """
 import unittest
 from models.base import Base
@@ -88,6 +89,37 @@ class TestBase_to_json_string(unittest.TestCase):
         list_dictionaries = None
         json_dictionary = Base.to_json_string(list_dictionaries)
         self.assertEqual(json_dictionary, '[]')
+
+
+class TestBase_save_to_file(unittest.TestCase):
+    """Unittest to test save_to_file in base.py"""
+
+    @classmethod
+    def setUpClass(cls):
+        Base._Base__nb_objects = 0
+
+    @classmethod
+    def tearDownClass(cls):
+        with open("Base.json", "w") as f:
+            f.write("[]")
+
+    def test_save_to_file_empty_list(self):
+        list_objs = []
+        Base.save_to_file(None)
+        with open("Base.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_to_file_empty_dict(self):
+        list_objs = {}
+        Base.save_to_file(None)
+        with open("Base.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_to_file_None(self):
+        list_objs = None
+        Base.save_to_file(None)
+        with open("Base.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
 
 
 if __name__ == "__main__":
