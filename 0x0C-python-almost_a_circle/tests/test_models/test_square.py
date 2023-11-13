@@ -7,6 +7,8 @@ Unittest classes:
     TestSquare_y
     TestSquare_area
     TestSquare_stdout
+    TestSquare_update_args
+    TestSquare_update_kwargs
 """
 import unittest
 import sys
@@ -267,6 +269,118 @@ class TestSquare_stdout(unittest.TestCase):
         capture = TestSquare_stdout.capture_stdout(s, "display")
         display = "\n\n   ##\n   ##\n"
         self.assertEqual(display, capture.getvalue())
+
+
+class TestSquare_update_args(unittest.TestCase):
+    """Unittest for testing update args"""
+
+    def test_update_args_zero(self):
+        s = Square(10, 10, 10, 10)
+        s.update()
+        self.assertEqual("[Square] (10) 10/10 - 10", str(s))
+
+    def test_update_args_one(self):
+        s = Square(10, 10, 10, 10)
+        s.update(89)
+        self.assertEqual("[Square] (89) 10/10 - 10", str(s))
+
+    def test_update_args_two(self):
+        s = Square(10, 10, 10, 10)
+        s.update(89, 2)
+        self.assertEqual("[Square] (89) 10/10 - 2", str(s))
+
+    def test_update_args_three(self):
+        s = Square(10, 10, 10, 10)
+        s.update(89, 2, 3)
+        self.assertEqual("[Square] (89) 3/10 - 2", str(s))
+
+    def test_update_args_four(self):
+        s = Square(10, 10, 10, 10)
+        s.update(89, 2, 3, 4)
+        self.assertEqual("[Square] (89) 3/4 - 2", str(s))
+
+    def test_update_args_more_than_four(self):
+        s = Square(10, 10, 10, 10)
+        s.update(89, 2, 3, 4, 5)
+        self.assertEqual("[Square] (89) 3/4 - 2", str(s))
+
+    def test_update_args_invalid_size_type(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="width must be an integer"):
+            s.update(89, "invalid")
+
+    def test_update_args_size_zero(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            s.update(89, 0)
+
+    def test_update_args_size_negative(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            s.update(89, -1)
+
+    def test_update_args_invalid_x_type(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="x must be an integer"):
+            s.update(89, 2, "invalid")
+
+    def test_update_args_y_type(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            s.update(89, 1, 2, "invalid")
+
+class TestSquare_update_kwargs(unittest.TestCase):
+    """Unittest for testing update kwargs"""
+
+    def test_update_kwargs_zero(self):
+        s = Square(10, 10, 10, 10)
+        s.update()
+        self.assertEqual("[Square] (10) 10/10 - 10", str(s))
+
+    def test_update_kwargs_one(self):
+        s = Square(10, 10, 10, 10)
+        s.update(id=89)
+        self.assertEqual("[Square] (89) 10/10 - 10", str(s))
+
+    def test_update_kwargs_two(self):
+        s = Square(10, 10, 10, 10)
+        s.update(id=89, size=2)
+        self.assertEqual("[Square] (89) 10/10 - 2", str(s))
+
+    def test_update_kwargs_three(self):
+        s = Square(10, 10, 10, 10)
+        s.update(id=89, size=2, x=3)
+        self.assertEqual("[Square] (89) 3/10 - 2", str(s))
+
+    def test_update_kwargs_four(self):
+        s = Square(10, 10, 10, 10)
+        s.update(id=89, size=2, x=3, y=4)
+        self.assertEqual("[Square] (89) 3/4 - 2", str(s))
+
+    def test_update_kwargs_invalid_size_type(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="width must be an integer"):
+            s.update(id=89, size="invalid")
+
+    def test_update_kwargs_size_zero(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            s.update(id=89, size=0)
+
+    def test_update_kwargs_size_negative(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaises(ValueError, msg="width must be > 0"):
+            s.update(id=89, size=-1)
+
+    def test_update_kwargs_invalid_x_type(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaises(TypeError, msg="x must be an integer"):
+            s.update(id=89, x="invalid")
+
+    def test_update_kwargs_y_type(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaisesRegex(TypeError, "y must be an integer"):
+            s.update(id=89, y="invalid")
 
 if __name__ == "__main__":
     unittest.main()
