@@ -4,6 +4,7 @@ Unittest classes:
     TestBase_instantiation
     TestBase_to_json_string
     TestBase_save_to_file
+    TestBase_from_json_string
 """
 import unittest
 from models.base import Base
@@ -121,6 +122,37 @@ class TestBase_save_to_file(unittest.TestCase):
         with open("Base.json", "r") as f:
             self.assertEqual(f.read(), "[]")
 
+
+class TestBase_from_json_string(unittest.TestCase):
+    """Unittest to test from_json_string in base.py"""
+
+    def test_from_json_string_None(self):
+        json_string = None
+        list_dictionaries = Base.from_json_string(json_string)
+        self.assertEqual(list_dictionaries, [])
+
+    def test_from_json_string_empty(self):
+        json_string = "[]"
+        list_dictionaries = Base.from_json_string(json_string)
+        self.assertEqual(list_dictionaries, [])
+
+    def test_from_json_string_one(self):
+        json_string = '[{"key": "value"}]'
+        list_dictionaries = Base.from_json_string(json_string)
+        self.assertEqual(list_dictionaries, [{"key": "value"}])
+
+    def test_from_json_string_two(self):
+        json_string = '[{"key": "value"}, {"key": "value2"}]'
+        list_dictionaries = Base.from_json_string(json_string)
+        self.assertEqual(list_dictionaries, [{"key": "value"}, {"key": "value2"}])
+
+    def test_from_json_string_no_args(self):
+        with self.assertRaises(TypeError):
+            Base.from_json_string()
+
+    def test_from_json_string_more_than_one_arg(self):
+        with self.assertRaises(TypeError):
+            Base.from_json_string([], 1)
 
 if __name__ == "__main__":
     unittest.main()
