@@ -9,6 +9,7 @@ Unittest classes:
     TestSquare_stdout
     TestSquare_update_args
     TestSquare_update_kwargs
+    TestSquare_dict
 """
 import unittest
 import sys
@@ -381,6 +382,26 @@ class TestSquare_update_kwargs(unittest.TestCase):
         s = Square(10, 10, 10, 10)
         with self.assertRaisesRegex(TypeError, "y must be an integer"):
             s.update(id=89, y="invalid")
+
+
+class TestSquare_dict(unittest.TestCase):
+    """Unittest for testing to_dictionary method of the Square class"""
+
+    def test_to_dictionary_output(self):
+        s = Square(10, 2, 1, 1)
+        correct = {'id': 1, 'x': 2, 'size': 10, 'y': 1}
+        self.assertDictEqual(correct, s.to_dictionary())
+
+    def test_to_dictionary_no_object_changes(self):
+        s1 = Square(10, 2, 1, 2)
+        s2 = Square(1, 2, 10)
+        s2.update(**s1.to_dictionary())
+        self.assertNotEqual(s1, s2)
+
+    def test_to_dictionary_arg(self):
+        s = Square(10, 10, 10, 10)
+        with self.assertRaises(TypeError):
+            s.to_dictionary(1)
 
 if __name__ == "__main__":
     unittest.main()
