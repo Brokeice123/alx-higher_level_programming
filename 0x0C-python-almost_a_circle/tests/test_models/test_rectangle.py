@@ -10,6 +10,7 @@ Unittest classes:
     TestRectangle_stdout
     TestRectangle_update_args
     TestRectangle_update_kwargs
+    TestRectangle_dict
 """
 import unittest
 import io
@@ -453,6 +454,26 @@ class TestRectangle_update_kwargs(unittest.TestCase):
         r = Rectangle(10, 10, 10, 10, 10)
         with self.assertRaises(TypeError, msg="y must be an integer"):
             r.update(id=1, y="2")
+
+
+class TestRectangle_dict(unittest.TestCase):
+    """Unittests for testing to_dictionary method of Rectangle class"""
+
+    def test_to_dictionary_output(self):
+        r = Rectangle(10, 2, 1, 9, 5)
+        correct = {'x': 1, 'y': 9, 'id': 5, 'height': 2, 'width': 10}
+        self.assertDictEqual(correct, r.to_dictionary())
+
+    def test_to_dictionary_no_object_changes(self):
+        r1 = Rectangle(10, 2, 1, 9, 5)
+        r2 = Rectangle(5, 9, 1, 2, 10)
+        r2.update(**r1.to_dictionary())
+        self.assertNotEqual(r1, r2)
+
+    def test_to_dictionary_arg(self):
+        r = Rectangle(10, 2, 4, 1, 2)
+        with self.assertRaises(TypeError):
+            r.to_dictionary(1)
 
 if __name__ == "__main__":
     unittest.main()
