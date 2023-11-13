@@ -5,9 +5,12 @@ Unittest classes:
     TestBase_to_json_string
     TestBase_save_to_file
     TestBase_from_json_string
+    TestBase_create
 """
 import unittest
 from models.base import Base
+from models.rectangle import Rectangle
+from models.square import Square
 
 
 class TestBase_instantiation(unittest.TestCase):
@@ -153,6 +156,46 @@ class TestBase_from_json_string(unittest.TestCase):
     def test_from_json_string_more_than_one_arg(self):
         with self.assertRaises(TypeError):
             Base.from_json_string([], 1)
+
+
+class TestBase_create(unittest.TestCase):
+    """Unittest to test create in base.py"""
+
+    def test_create_rectangle_original(self):
+        r1 = Rectangle(3, 5, 1, 2, 7)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertEqual("[Rectangle] (7) 1/2 - 3/5", str(r1))
+
+    def test_create_rectangle_new(self):
+        r1 = Rectangle(3, 5, 1, 2, 7)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertEqual("[Rectangle] (7) 1/2 - 3/5", str(r2))
+
+    def test_create_rectangle_is(self):
+        r1 = Rectangle(3, 5, 1, 2, 7)
+        r1_dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**r1_dictionary)
+        self.assertIsNot(r1, r2)
+
+    def test_create_square_original(self):
+        s1 = Square(3, 1, 2, 7)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertEqual("[Square] (7) 1/2 - 3", str(s1))
+
+    def test_create_square_new(self):
+        s1 = Square(3, 1, 2, 7)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertEqual("[Square] (7) 1/2 - 3", str(s2))
+
+    def test_create_square_is(self):
+        s1 = Square(3, 1, 2, 7)
+        s1_dictionary = s1.to_dictionary()
+        s2 = Square.create(**s1_dictionary)
+        self.assertIsNot(s1, s2)
 
 if __name__ == "__main__":
     unittest.main()
