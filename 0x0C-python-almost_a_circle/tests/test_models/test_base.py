@@ -2,6 +2,7 @@
 """Unittest for base.py
 Unittest classes:
     TestBase_instantiation
+    TestBase_to_json_string
 """
 import unittest
 from models.base import Base
@@ -58,6 +59,35 @@ class TestBase_instantiation(unittest.TestCase):
     def test_dict_id(self):
         b1 = Base({"key": "value"})
         self.assertEqual(b1.id, {"key": "value"})
+
+
+class TestBase_to_json_string(unittest.TestCase):
+    """Unittest to test to_json_string in base.py"""
+
+    def test_to_json_string_list(self):
+        list_dictionaries = [{"key": "value"}, {"key": "value2"}]
+        json_dictionary = Base.to_json_string(list_dictionaries)
+        self.assertEqual(json_dictionary, '[{"key": "value"}, {"key": "value2"}]')
+
+    def test_to_json_string_dict(self):
+        dictionary = {"key": "value"}
+        json_dictionary = Base.to_json_string(dictionary)
+        self.assertEqual(json_dictionary, '{"key": "value"}')
+
+    def test_to_json_string_empty_list(self):
+        list_dictionaries = []
+        json_dictionary = Base.to_json_string(list_dictionaries)
+        self.assertEqual(json_dictionary, '[]')
+
+    def test_to_json_string_empty_dict(self):
+        dictionary = {}
+        json_dictionary = Base.to_json_string(dictionary)
+        self.assertEqual(json_dictionary, '[]')
+
+    def test_to_json_string_None(self):
+        list_dictionaries = None
+        json_dictionary = Base.to_json_string(list_dictionaries)
+        self.assertEqual(json_dictionary, '[]')
 
 
 if __name__ == "__main__":
