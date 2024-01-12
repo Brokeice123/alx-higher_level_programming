@@ -14,8 +14,6 @@ if __name__ == "__main__":
     cur.execute("SELECT cities.id, cities.name FROM cities "
                 "JOIN states ON cities.state_id = states.id "
                 "WHERE states.name = '{}'".format(argv[4]))
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
+    print(", ".join([row[1] for row in cur.fetchall()]))
     cur.close()
     db.close()
