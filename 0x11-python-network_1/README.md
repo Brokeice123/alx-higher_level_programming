@@ -10,6 +10,6 @@
 - How to manipulate data from an external service
 ---
 ## *Resources*
-- [HOWTO Fetch Internet Resources Using urllib Package](https://requests.readthedocs.io/en/latest/user/quickstart/#json-response-content)
+- [HOWTO Fetch Internet Resources Using urllib Package](https://docs.python.org/3/howto/urllib2.html#introduction)
 - [Quickstart with Requests package](https://requests.readthedocs.io/en/latest/user/install/#install)
 - [Requests package](https://pypi.org/project/requests/)
